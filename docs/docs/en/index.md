@@ -1,25 +1,23 @@
 ---
 layout: default
-title: "Documentation in English"
-nav_order: 3
+title: "Technical Documentation in English"
+nav_order: 1
 has_children: true
 ---
 
-# 📘 Technical Documentation · English Version
+# 📘 Technical Guide (English Version)
 
-Welcome to the full technical documentation of this **self-hosted personal HomeLab project**. Here you'll find guides, examples and configurations to help you set up and maintain your own home server using modern, efficient and secure technologies.
+Welcome to the complete English documentation for the **self-hosted personal HomeLab project**. This guide includes tutorials, examples, and configurations to help you build and maintain your own home server using modern, efficient, and secure technologies.
 
-> 🚧 This documentation is a work in progress and will be expanded continuously.
+> 🚧 This documentation is a work in progress and is updated continuously.
 
 ---
 
 ## 🧱 Infrastructure and Architecture
 
-> Initial setup, home network, hardware and connectivity between devices.
+> Initial deployment, home networking, hardware, and device connectivity.
 
-- [01 – General architecture](infrastructure/01-general-architecture.md)
-- [02 – Base system installation](infrastructure/02-system-installation.md)
-- [03 – Network, VPN and sharing (Tailscale, Samba)](infrastructure/03-network-connectivity.md)
+🔗 [Go to Infrastructure section index](infraestructura/index.md)
 
 ---
 
@@ -27,54 +25,44 @@ Welcome to the full technical documentation of this **self-hosted personal HomeL
 
 > All services are deployed using Docker, categorized by server (Raspberry Pi or MSI).
 
-- [04 – Services on Raspberry Pi](services/04-raspberry-services.md)
-- [05 – Services on the MSI server](services/05-msi-services.md)
+🔗 [Go to Services section index](servicios/index.md)
 
 ---
 
-## 🤖 Automation and Local AI
+## 🤖 Automation and Artificial Intelligence
 
-> Task automation with n8n, custom flows and local AI experimentation.
+> Task automation with n8n, custom flows, and getting started with local AI models.
 
-- [06 – Automating flows with n8n](automation/06-n8n.md)
-- [07 – Getting started with local AI models](automation/07-local-ai.md)
+🔗 [Go to Automation & AI section index](automatizacion/index.md)
 
 ---
 
-## 🔐 Security, Backups and Monitoring
+## 🔐 Security, Backups, and Monitoring
 
-> System monitoring, automatic backups, alerts and service protection.
+> System monitoring, automatic backups, alerting, and service protection.
 
-- [08 – Monitoring with Netdata](security/08-monitoring.md)
-- [09 – Backup and restore strategies](security/09-backups.md)
-- [10 – Security best practices](security/10-security.md)
+🔗 [Go to Security section index](seguridad/index.md)
 
 ---
 
 ## 💡 Use Cases and Extensions
 
-> Real use cases: multimedia, syncing, remote access, and small business tools.
+> Practical ideas for personal or professional use: media center, synchronization, remote access, and more.
 
-- [11 – Personal media center](usecases/11-media-center.md)
-- [12 – Remote access and home office](usecases/12-remote-office.md)
-- [13 – Tools for freelancers and small businesses](usecases/13-freelance-smb.md)
+🔗 [Go to Use Cases section index](casos/index.md)
 
 ---
 
-## 📦 Additional Resources and Annexes
+## 📦 Annexes and Additional Resources
 
-> Scripts, configurations, useful resources and external links.
+> Scripts, configurations, useful tools, and external references.
 
-- [14 – Docker files](resources/14-docker.md)
-- [15 – Utility scripts](resources/15-scripts.md)
-- [16 – References and recommended reading](resources/16-references.md)
+🔗 [Go to Resources section index](recursos/index.md)
 
 ---
 
-## 📌 About this Project
+## 📌 About the Project
 
-This HomeLab is deployed using a Raspberry Pi and an Ubuntu-based server, connected via encrypted VPN and accessible from anywhere. It's designed to combine learning with real-world, replicable solutions for personal or professional use.
+This system is deployed on a Raspberry Pi and an Ubuntu server, connected via an encrypted VPN and accessible from anywhere. It aims to combine technical learning with practical and replicable solutions for individuals or small organizations.
 
-If you're interested in building something similar, check out the [GitHub repository](https://github.com/angelmrdev/selfhosted-homeserver-documentation) or feel free to reach out and contribute.
-
----
+If you're interested in setting up a similar project, check out the [GitHub repository](https://github.com/angelmrdev/selfhosted-homeserver-documentation) or get in touch to collaborate.

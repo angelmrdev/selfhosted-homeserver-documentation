@@ -34,12 +34,12 @@ Este proyecto tiene como objetivo la creación y mantenimiento de una infraestru
 
 ## 📚 Estructura de la documentación
 
-- 🧱 [Infraestructura y arquitectura](./docs/es/infraestructura/index.md)
-- 🗃️ [Servicios autoalojados](./docs/es/servicios/index.md)
-- 🤖 [Automatización e IA](./docs/es/automatizacion/index.md)
-- 🔐 [Seguridad, copias y monitorización](./docs/es/seguridad/index.md)
-- 💡 [Casos de uso y extensiones](./docs/es/casos/index.md)
-- 📦 [Anexos y recursos adicionales](./docs/es/recursos/index.md)
+- 🧱 Infraestructura y arquitectura
+- 🗃️ Servicios autoalojados
+- 🤖 Automatización e IA
+- 🔐 Seguridad, copias, monitorización y troubleshooting
+- 💡 Casos de uso y extensiones
+- 📦 Anexos y recursos adicionales
 
 ---
 
