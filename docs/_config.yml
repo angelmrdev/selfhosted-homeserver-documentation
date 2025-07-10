@@ -1,0 +1,21 @@
+title: "Home Server – Selfhosted Documentation"
+description: "Documentación técnica del proyecto de Home Server autoalojado"
+theme: "just-the-docs"
+baseurl: "/selfhosted-homeserver-documentation"  # ⚠️ Muy importante si tu repo NO es tu username.github.io
+
+color_scheme: light
+
+# Navegación
+nav_sort: case_insensitive
+search_enabled: true
+
+# URL del idioma principal
+aux_links:
+  🗣️ Versión en Español: /selfhosted-homeserver-documentation/docs/
+  🌐 English Version: /selfhosted-homeserver-documentation/docs/en/
+
+# Footer
+footer_content: "© 2025 Ángel Martín Ramírez. Documentación técnica del proyecto HomeLab personal."
+
+# Repositorio (opcional para botón)
+github_url: https://github.com/angelmrdev/selfhosted-homeserver-documentation
