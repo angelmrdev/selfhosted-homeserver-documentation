@@ -3,7 +3,7 @@ description: "Documentación técnica del proyecto de Home Server autoalojado"
 theme: "just-the-docs"
 baseurl: "/selfhosted-homeserver-documentation"  # ⚠️ Muy importante si tu repo NO es tu username.github.io
 
-color_scheme: light
+color_scheme: dark
 
 # Navegación
 nav_sort: case_insensitive
