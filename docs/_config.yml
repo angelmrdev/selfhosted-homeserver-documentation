@@ -13,10 +13,13 @@
 # you will see them accessed via {{ site.title }}, {{ site.github_repo }}, and so on.
 # You can create any custom variable you would like, and they will be accessible
 # in the templates via {{ site.myvariable }}.
-title: "Selfhosted Home Server Documentation"
-description: "Documentación técnica del proyecto HomeLab"
+title: "Selfhosted Home Server – Technical Docs"
+description: "Guía técnica del HomeLab personal de Ángel Martín Ramírez: contenedores, automatización, IA y más."
 baseurl: "/selfhosted-homeserver-documentation"
 color_scheme: dark
+logo: "/assets/images/logo.png"
+favicon_ico: "/assets/images/favicon.ico"
+
 
 
 defaults:
