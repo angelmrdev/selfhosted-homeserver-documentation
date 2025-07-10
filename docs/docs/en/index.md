@@ -1,8 +1,9 @@
 ---
 layout: default
 title: "Technical Documentation in English"
-nav_order: 1
+nav_order: 2
 has_children: true
+parent: "Inicio"
 ---
 
 # 📘 Technical Guide (English Version)

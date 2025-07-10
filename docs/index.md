@@ -2,6 +2,7 @@
 layout: home
 title: "Inicio"
 nav_order: 1
+has_children: true
 ---
 
 # 🏠 Documentación del Home Server

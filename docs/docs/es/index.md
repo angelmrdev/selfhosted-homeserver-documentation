@@ -3,6 +3,7 @@ layout: default
 title: "Documentación en Español"
 nav_order: 1
 has_children: true
+parent: "Inicio"
 ---
 
 # 📘 Guía Técnica en Español
