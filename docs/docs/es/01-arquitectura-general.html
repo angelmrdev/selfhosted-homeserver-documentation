@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>01 - Arquitectura general</title>
+  <link rel="stylesheet" href="/docs/css/styles.css" />
+</head>
+<body>
+
+  <h1>01 - Arquitectura general</h1>
+
+  <p>Esta sección presenta una visión general de la arquitectura de mi homelab personal, compuesto por dos servidores físicos, conectividad privada mediante VPN y servicios autoalojados tanto ligeros como pesados. La infraestructura está diseñada para ser escalable, modular y segura, con foco en el autoaprendizaje y la productividad.</p>
+
+  <hr />
+
+  <h2>🧠 Filosofía del proyecto</h2>
+  <ul>
+    <li>🖥️ <strong>Reutilización de hardware secundario</strong>: se utilizan equipos que ya tenía en casa (un portátil MSI en desuso y una Raspberry Pi), aprovechando al máximo sus capacidades sin necesidad de grandes inversiones.</li>
+    <li>🧠 <strong>Aprendizaje técnico real y aplicable</strong>: cada decisión del sistema está pensada para mejorar mis habilidades como administrador de sistemas, automatizador y self-hoster.</li>
+    <li>♻️ <strong>Sostenibilidad y eficiencia</strong>: los servicios están distribuidos en función del consumo energético, uso real y escalabilidad.</li>
+    <li>📚 <strong>Documentación modular y replicable</strong>: todo el proyecto está estructurado para que otros puedan aprender o replicarlo fácilmente, sin exponer datos privados.</li>
+  </ul>
+
+  <hr />
+
+  <h2>🖥️ Servidores</h2>
+
+  <h3>🔵 MSI Ubuntu Server 24</h3>
+  <ul>
+    <li><strong>Sistema operativo:</strong> Ubuntu Server 24.04 (instalación limpia)</li>
+    <li><strong>Usuario principal:</strong> <code>msi</code></li>
+    <li><strong>Funciones principales:</strong>
+      <ul>
+        <li>Automatización avanzada (n8n)</li>
+        <li>Generación de imágenes con IA (AUTOMATIC1111)</li>
+        <li>LLMs en local (OpenWebUI, KoboldCpp)</li>
+        <li>Backups y tareas programadas</li>
+      </ul>
+    </li>
+    <li><strong>Conectividad:</strong>
+      <ul>
+        <li>Conectado a Tailscale (VPN segura)</li>
+        <li>Accesible desde LAN y desde Tailscale (MagicDNS)</li>
+      </ul>
+    </li>
+    <li><strong>Compartición de archivos:</strong>
+      <ul>
+        <li>Carpeta compartida vía <strong>Samba</strong>: acceso completo al sistema (<code>/</code>)</li>
+        <li>Accesible desde Windows como unidad de red: <code>\\100.x.x.x\msi</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <h3>🟢 Raspberry Pi (PiOS + Docker)</h3>
+  <ul>
+    <li><strong>Dispositivo base:</strong> Raspberry Pi con Raspbian/PiOS actualizado</li>
+    <li><strong>Discos conectados:</strong>
+      <ul>
+        <li>HDD montado en <code>/home/pi/hdd</code></li>
+        <li>SSD montado en <code>/home/pi/ssd1</code> (vía adaptador PCIe)</li>
+      </ul>
+    </li>
+    <li><strong>Funciones principales:</strong>
+      <ul>
+        <li>Servicios ligeros y multimedia</li>
+        <li>Dashboard y herramientas de red</li>
+        <li>Proxy inverso y domótica</li>
+      </ul>
+    </li>
+    <li><strong>Conectividad:</strong>
+      <ul>
+        <li>Conectado a Tailscale</li>
+        <li>También accesible vía LAN local</li>
+      </ul>
+    </li>
+    <li><strong>Compartición de archivos:</strong>
+      <ul>
+        <li>Carpeta compartida vía <strong>Samba</strong>: <code>/home/pi</code></li>
+        <li>Accesible desde Windows como <code>\\100.x.x.x\raspberry</code></li>
+      </ul>
+    </li>
+  </ul>
+
+  <h4>🧰 Montaje de un NAS casero</h4>
+  <p>Esta Raspberry Pi no solo aloja servicios ligeros, sino que también funciona como un pequeño <strong>NAS doméstico</strong> de bajo consumo. Se ha configurado así:</p>
+  <ul>
+    <li><strong>Sistema operativo:</strong> PiOS Lite instalado sobre tarjeta microSD clase 10 (rendimiento aceptable para tareas básicas).</li>
+    <li><strong>Almacenamiento:</strong>
+      <ul>
+        <li>🔌 <strong>WD My Book 4TB (USB)</strong> → montado en <code>/home/pi/hdd</code>
+          <ul><li>Uso: almacenamiento multimedia (Jellyfin) y descargas (qBittorrent)</li></ul>
+        </li>
+        <li>⚙️ <strong>Tarjeta PCIe con 4 bahías SSD</strong>:
+          <ul>
+            <li><strong>SSD 1TB</strong> → montado en <code>/home/pi/ssd1</code>
+              <ul><li>Uso: copia de seguridad de fotos y vídeos de Immich</li></ul>
+            </li>
+            <li><strong>HDD reciclado</strong> de un portátil antiguo (añadido a futuro)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><strong>Montajes permanentes:</strong> configurados con UUID en <code>fstab</code> para garantizar persistencia entre reinicios.</li>
+    <li><strong>Compartido por Samba:</strong> toda la ruta <code>/home/pi</code> está accesible desde Windows como unidad de red (<code>\\raspberry</code>).</li>
+  </ul>
+
+  <p>Esta configuración convierte la Pi en una <strong>solución NAS eficiente y económica</strong>, ideal para centralizar archivos y mantener backups automáticos, sin necesidad de invertir en un NAS dedicado.</p>
+
+  <hr />
+
+  <h3>💻 Portátil Windows (cliente)</h3>
+  <ul>
+    <li><strong>Sistema:</strong> Windows 10/11</li>
+    <li><strong>Conectividad:</strong>
+      <ul>
+        <li>Conectado a la red Tailscale</li>
+        <li>Acceso cifrado a ambos servidores sin abrir puertos</li>
+      </ul>
+    </li>
+    <li><strong>Accesos configurados:</strong>
+      <ul>
+        <li>Unidades de red montadas: <code>\\msi</code> y <code>\\raspberry</code></li>
+        <li>Interfaz web para servicios como Jellyfin, n8n, Immich, etc.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <hr />
+
+  <h3>❓ Sobre los servidores</h3>
+  <ul>
+    <li><strong>¿Por qué no uso Docker en el MSI?</strong><br>El MSI ejecuta servicios más complejos como AUTOMATIC1111 o n8n con integración directa de hardware (GPU), por lo que prefiero tener un control total sobre el sistema mediante instalaciones manuales.</li>
+    <li><strong>¿Por qué centralizar los contenedores en la Raspberry Pi?</strong><br>La Raspberry Pi, aunque más modesta, es perfecta para ejecutar servicios ligeros y contenerizados. Gracias a Docker, puedo aislar, actualizar y gestionar cada servicio sin comprometer el rendimiento general.</li>
+    <li><strong>¿Por qué elegir un MSI viejo y una Pi?</strong><br>Porque es un enfoque económico y sostenible. Este proyecto está pensado para <strong>sacar partido a hardware secundario</strong>, útil para formarse, experimentar y tener control total sobre tu red y tus datos.</li>
+  </ul>
+
+  <hr />
+
+  <h2>🌐 Red y conectividad</h2>
+  <ul>
+    <li><strong>VPN privada con Tailscale:</strong>
+      <ul>
+        <li>Conexión cifrada entre todos los dispositivos</li>
+        <li>Acceso remoto incluso fuera de la LAN</li>
+        <li>Uso de MagicDNS (ej: <code>raspberry.tailnet-name.ts.net</code>)</li>
+      </ul>
+    </li>
+    <li><strong>Alternativa LAN local:</strong>
+      <ul>
+        <li>Conexión directa cuando todos los dispositivos están en la misma red local</li>
+        <li>Configurado como fallback si Tailscale no está disponible</li>
+      </ul>
+    </li>
+    <li><strong>Sin puertos abiertos en router:</strong> máxima privacidad y seguridad</li>
+  </ul>
+
+  <h3>❓ Sobre la red</h3>
+  <ul>
+    <li><strong>¿Por qué uso Tailscale como base de red?</strong><br>Tailscale permite crear una VPN mesh segura y cifrada entre dispositivos sin necesidad de abrir puertos ni complicarse con el router. Es ideal para un entorno doméstico con alta seguridad.</li>
+    <li><strong>¿Por qué tener acceso LAN además de VPN?</strong><br>Aunque Tailscale cubre todos los casos, tener acceso LAN local asegura compatibilidad y velocidad máxima en caso de que la VPN no esté disponible o haya cambios en la red.</li>
+    <li><strong>¿Es seguro este tipo de montaje?</strong><br>Sí. No se expone ningún puerto públicamente. Todo el acceso está restringido a mi red privada, protegida por la autenticación de Tailscale y el aislamiento de cada servicio.</li>
+  </ul>
+
+  <hr />
+
+  <h2>📊 Diagramas técnicos</h2>
+  <p>Consulta la carpeta <a href="/diagrams">/diagrams</a> para ver los esquemas de red y almacenamiento del proyecto:</p>
+  <ul>
+    <li><code>topologia-red.drawio</code> – Diagrama de conexión entre dispositivos</li>
+    <li><code>arquitectura-almacenamiento.drawio</code> – Distribución de discos, puntos de montaje y backups</li>
+  </ul>
+
+  <hr />
+
+  <h2>🧾 Resumen</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Elemento</th>
+        <th>Descripción breve</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Servidores</strong></td>
+        <td>MSI con Ubuntu Server y Raspberry Pi con PiOS</td>
+      </tr>
+      <tr>
+        <td><strong>Cliente</strong></td>
+        <td>Portátil Windows conectado por Tailscale</td>
+      </tr>
+      <tr>
+        <td><strong>Red</strong></td>
+        <td>VPN con MagicDNS + LAN opcional</td>
+      </tr>
+      <tr>
+        <td><strong>Almacenamiento</strong></td>
+        <td>Compartido por Samba, discos externos montados por UUID</td>
+      </tr>
+      <tr>
+        <td><strong>Accesos</strong></td>
+        <td>Desde Windows, interfaces web, y SSH</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <hr />
+
+  <p><em>🛠️ Esta arquitectura está en constante evolución. Los cambios o ampliaciones se documentarán en las siguientes secciones.</em></p>
+
+</body>
+</html>
