@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "✅ Pruebas iniciales del sistema"
+title: "Pruebas iniciales del sistema"
 parent: "02 – Instalación y configuración del sistema"
 nav_order: 5
 ---
