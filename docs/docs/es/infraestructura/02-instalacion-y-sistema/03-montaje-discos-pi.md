@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "🧱 Montaje de discos en la Raspberry Pi"
+title: "Montaje de discos en la Raspberry Pi"
 parent: "02 – Instalación y configuración del sistema"
 nav_order: 3
 ---

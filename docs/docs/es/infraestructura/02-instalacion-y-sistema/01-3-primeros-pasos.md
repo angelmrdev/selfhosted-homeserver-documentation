@@ -1,6 +1,6 @@
 ---
 layout: default
-title: "🔧 Primeros pasos tras la instalación"
+title: "Primeros pasos tras la instalación"
 parent: "Instalación de sistemas y primeros pasos"
 nav_order: 3
 ---

@@ -22,8 +22,8 @@ Esta sección describe los componentes fundamentales del HomeLab, desde el dise�
 - [02 – Instalación del sistema base](02-instalacion-y-sistema/index.md)  
   Guía paso a paso para instalar Raspberry Pi OS y Ubuntu Server, preparar discos, y configurar el entorno inicial.
 
-- [03 – Red, VPN y compartición (Tailscale, Samba)](03-red-vpn-samba/index.md)  
-  Configuración de red privada con Tailscale, compartición de archivos mediante Samba y conexión segura entre nodos.
+- [03 – Red, VPN y acceso remoto (Tailscale, Unidades de almacenamiento, Recursos compartidos)](03-red-vpn-samba/index.md)  
+  Configuración de red privada con Tailscale y acceso a los recursos compartidos.
 
 ---
 
