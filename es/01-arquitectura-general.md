@@ -1,6 +1,6 @@
-# 01 - Arquitectura general
+# 🖥️ 01 – Arquitectura general
 
-Esta sección presenta una visión general de la arquitectura de mi homelab personal, compuesto por dos servidores físicos, conectividad privada mediante VPN y servicios autoalojados tanto ligeros como pesados. La infraestructura está diseñada para ser escalable, modular y segura, con foco en el autoaprendizaje y la productividad.
+Esta sección presenta una visión general de la arquitectura del homelab personal, compuesto por dos servidores físicos, conectividad privada mediante VPN y servicios autoalojados tanto ligeros como pesados. La infraestructura está diseñada para ser escalable, modular y segura, con foco en el autoaprendizaje y la productividad.
 
 ---
 
@@ -8,11 +8,10 @@ Esta sección presenta una visión general de la arquitectura de mi homelab pers
 
 Este homelab está diseñado con una mentalidad realista, accesible y práctica:
 
-- 🖥️ **Reutilización de hardware secundario**: se utilizan equipos que ya tenía en casa (un portátil MSI en desuso y una Raspberry Pi), aprovechando al máximo sus capacidades sin necesidad de grandes inversiones.
-- 🧠 **Aprendizaje técnico real y aplicable**: cada decisión del sistema está pensada para mejorar mis habilidades como administrador de sistemas, automatizador y self-hoster.
-- ♻️ **Sostenibilidad y eficiencia**: los servicios están distribuidos en función del consumo energético, uso real y escalabilidad.
-- 📚 **Documentación modular y replicable**: todo el proyecto está estructurado para que otros puedan aprender o replicarlo fácilmente, sin exponer datos privados.
-
+- 🖥️ **Reutilización de hardware secundario**: portátil MSI en desuso y Raspberry Pi, sin grandes inversiones.
+- 🧠 **Aprendizaje técnico real y aplicable**: cada decisión refuerza habilidades como administrador de sistemas.
+- ♻️ **Sostenibilidad y eficiencia**: distribución de servicios según consumo y función.
+- 📚 **Documentación modular y replicable**: pensada para ser útil a otros sin comprometer seguridad ni privacidad.
 
 ---
 
@@ -69,7 +68,7 @@ Esta Raspberry Pi no solo aloja servicios ligeros, sino que también funciona co
 - **Montajes permanentes** configurados con UUID en `fstab` para garantizar persistencia entre reinicios.
 - **Compartido por Samba** → toda la ruta `/home/pi` está accesible desde Windows como unidad de red (`\\raspberry`).
 
-Esta configuración convierte la Pi en una **solución NAS eficiente y económica**, ideal para centralizar archivos y mantener backups automáticos, sin necesidad de invertir en un NAS dedicado.
+> Esta configuración convierte la Pi en una **solución NAS eficiente y económica**, ideal para centralizar archivos y mantener backups automáticos, sin necesidad de invertir en un NAS dedicado.
 
 ---
 
@@ -85,65 +84,53 @@ Esta configuración convierte la Pi en una **solución NAS eficiente y económic
 
 ---
 
-### ❓Sobre los servidores
+## 🔧 Consideraciones de diseño
 
-**¿Por qué no uso Docker en el MSI?**  
-El MSI ejecuta servicios más complejos como AUTOMATIC1111 o n8n con integración directa de hardware (GPU), por lo que prefiero tener un control total sobre el sistema mediante instalaciones manuales.
+**¿Por qué no usar Docker en el MSI?**  
+Prefiero instalaciones manuales para servicios con uso intensivo de GPU o hardware, como AUTOMATIC1111 o LLMs.
 
-**¿Por qué centralizar los contenedores en la Raspberry Pi?**  
-La Raspberry Pi, aunque más modesta, es perfecta para ejecutar servicios ligeros y contenerizados. Gracias a Docker, puedo aislar, actualizar y gestionar cada servicio sin comprometer el rendimiento general.
+**¿Por qué centralizar contenedores en la Pi?**  
+Permite aislamiento, ligereza y facilidad de gestión gracias a Docker. Ideal para servicios livianos y pruebas.
 
-**¿Por qué elegir un MSI viejo y una Pi?**  
-Porque es un enfoque económico y sostenible. Este proyecto está pensado para **sacar partido a hardware secundario**, útil para formarse, experimentar y tener control total sobre tu red y tus datos.
+**¿Por qué este hardware?**  
+Es un enfoque **económico, funcional y formativo**, aprovechando equipos secundarios para construir un sistema completo.
 
 ---
 
 ## 🌐 Red y conectividad
 
-- **VPN privada con Tailscale**
-  - Conexión cifrada entre todos los dispositivos
-  - Acceso remoto incluso fuera de la LAN
-  - Uso de MagicDNS (ej: `raspberry.tailnet-name.ts.net`)
-- **Alternativa LAN local**
-  - Conexión directa cuando todos los dispositivos están en la misma red local
-  - Configurado como fallback si Tailscale no está disponible
+- **VPN mesh con Tailscale**
+  - Conexión cifrada entre servidores y cliente
+  - Acceso remoto desde cualquier lugar
+  - Uso de MagicDNS (`nombre.tailnet.ts.net`)
+- **Acceso LAN local**
+  - Para máxima velocidad en red doméstica
+  - Funciona como fallback si VPN no está disponible
 - **Sin puertos abiertos en router**
-  - Máxima privacidad y seguridad
 
----
-
-### ❓ Sobre la red
-
-**¿Por qué uso Tailscale como base de red?**  
-Tailscale permite crear una VPN mesh segura y cifrada entre dispositivos sin necesidad de abrir puertos ni complicarse con el router. Es ideal para un entorno doméstico con alta seguridad.
-
-**¿Por qué tener acceso LAN además de VPN?**  
-Aunque Tailscale cubre todos los casos, tener acceso LAN local asegura compatibilidad y velocidad máxima en caso de que la VPN no esté disponible o haya cambios en la red.
-
-**¿Es seguro este tipo de montaje?**  
-Sí. No se expone ningún puerto públicamente. Todo el acceso está restringido a mi red privada, protegida por la autenticación de Tailscale y el aislamiento de cada servicio.
+> 🔐 Toda la arquitectura está pensada para ofrecer **privacidad y seguridad sin exponer servicios a internet público**.
 
 ---
 
 ## 📊 Diagramas técnicos
 
-Consulta la carpeta [`/diagrams`](../../diagrams) para ver los esquemas de red y almacenamiento del proyecto:
+Consulta la carpeta [`/diagrams`](../../../diagrams) para ver los esquemas del sistema:
 
-- `topologia-red.drawio` – Diagrama de conexión entre dispositivos
-- `arquitectura-almacenamiento.drawio` – Distribución de discos, puntos de montaje y backups
-
----
-
-## 🧾 Resumen
-
-| Elemento         | Descripción breve                                          |
-|------------------|------------------------------------------------------------|
-| **Servidores**   | MSI con Ubuntu Server y Raspberry Pi con PiOS             |
-| **Cliente**      | Portátil Windows conectado por Tailscale                   |
-| **Red**          | VPN con MagicDNS + LAN opcional                            |
-| **Almacenamiento** | Compartido por Samba, discos externos montados por UUID |
-| **Accesos**      | Desde Windows, interfaces web, y SSH                       |
+- `topologia-red.drawio`: conexión entre dispositivos
+- `arquitectura-almacenamiento.drawio`: discos, montajes y backups
 
 ---
 
-> 🛠️ Esta arquitectura está en constante evolución. Los cambios o ampliaciones se documentarán en las siguientes secciones.
+## 🧾 Resumen general
+
+| Elemento           | Descripción                                      |
+|--------------------|--------------------------------------------------|
+| **Servidores**     | MSI con Ubuntu + Raspberry Pi con PiOS          |
+| **Cliente**        | Portátil Windows conectado por Tailscale        |
+| **Red**            | VPN mesh + LAN opcional                         |
+| **Almacenamiento** | Samba + montajes persistentes por UUID         |
+| **Accesos**        | Web UI, SSH y unidades de red                   |
+
+---
+
+> 🛠️ Esta arquitectura es dinámica. Cualquier cambio se documentará en los siguientes artículos.
