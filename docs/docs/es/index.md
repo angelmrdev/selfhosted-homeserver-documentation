@@ -1,9 +1,8 @@
 ---
 layout: default
 title: "Documentación en Español"
-nav_order: 1
+nav_order: 2
 has_children: true
-parent: "Inicio"
 ---
 
 # 📘 Guía Técnica en Español
@@ -38,7 +37,7 @@ Bienvenido/a a la documentación completa en castellano del proyecto **HomeLab p
 
 ---
 
-## 🔐 Seguridad, copias y monitorización
+## 🔐 Seguridad, copias, monitorización y troubleshooting.
 
 > Supervisión del sistema, backups automáticos, alertas y protección de servicios.
 
