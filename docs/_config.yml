@@ -12,6 +12,10 @@ defaults:
     values:
       layout: "default"
 
+include:
+  - sitemap.xml
+  - robots.txt
+
 exclude:
   - .sass-cache/
   - .jekyll-cache/
