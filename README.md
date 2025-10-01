@@ -84,6 +84,7 @@ Soy técnico en sistemas y redes, con experiencia en automatización, servidores
 
 Puedes consultar la versión web estilizada del proyecto aquí:
 
-🔗 [https://angelmrdev.github.io/selfhosted-homelab-documentation/web/](https://angelmrdev.github.io/selfhosted-homelab-documentation/)
+🔗 [https://angelmrdev.github.io/selfhosted-homelab-documentation/](https://angelmrdev.github.io/selfhosted-homeserver-documentation/)
+
 
 ---
